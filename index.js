@@ -26,6 +26,7 @@ async function run() {
     // ***************************code write here*************************** 
     const database = client.db("karma-ecommerce");
     const cardCategoryCollection = database.collection("card-category");
+    const productsCollection = database.collection("products");
 
     // ########################## all post api are write here ###############################
     app.post('/card-category', async (req, res) => {
@@ -59,6 +60,13 @@ async function run() {
     app.get('/card-category', async(req, res) => {
         const getCategory = cardCategoryCollection.find();
         const result = await getCategory.toArray();
+        res.send(result);
+    });
+
+    app.get('/products', async(req, res) => {
+        const getProducts = productsCollection.find();
+        // .sort({ id: -1 }) 
+        const result = await getProducts.toArray();
         res.send(result);
     });
 
